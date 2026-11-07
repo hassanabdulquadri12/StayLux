@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book {{ room.name }} | StayLux</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f7f5f0;
+            color: #102a35;
+            padding: 35px 15px;
+        }
+
+        header {
+            max-width: 950px;
+            margin: 0 auto 25px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            font-weight: bold;
+            color: #b28d50;
+            text-decoration: none;
+        }
+
+        .booking-container {
+            max-width: 950px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 35px rgba(0,0,0,.07);
+        }
+
+        .booking-info {
+            background: #102a35;
+            color: white;
+            padding: 45px 35px;
+        }
+
+        .booking-info span {
+            color: #d7b77a;
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+
+        .booking-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            margin: 18px 0;
+        }
+
+        .booking-info p {
+            color: #d4dce0;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .room-price {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #45565d;
+        }
+
+        .room-price strong {
+            color: #d7b77a;
+            font-size: 24px;
+        }
+
+        .form-section {
+            padding: 40px 35px;
+        }
+
+        .form-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        form p {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 14px;
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #b28d50;
+        }
+
+        .errorlist {
+            color: #b91c1c;
+            font-size: 12px;
+            margin-top: 5px;
+            list-style: none;
+        }
+
+        .booking-summary {
+            background: #f7f5f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+
+        .booking-summary h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 18px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 14px 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .summary-row strong {
+            color: #102a35;
+        }
+
+        .total {
+            border-top: 1px solid #ddd;
+            padding-top: 16px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .total strong {
+            color: #a47c3d;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 22px;
+            background: #102a35;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        button:hover {
+            background: #c5a46d;
+            color: #102a35;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .back-link:hover {
+            color: #a47c3d;
+        }
+
+        @media (max-width: 700px) {
+            .booking-container {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-info {
+                padding: 30px 25px;
+            }
+
+            .booking-info h1 {
+                font-size: 28px;
+            }
+
+            .form-section {
+                padding: 30px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="{% url 'home' %}" class="logo">StayLux.</a>
+</header>
+
+<div class="booking-container">
+
+    <div class="booking-info">
+        <span>YOUR STAY BEGINS HERE</span>
+
+        <h1>Reserve Your Room</h1>
+
+        <p>
+            Complete your booking details and get ready
+            for a comfortable and memorable stay.
+        </p>
+
+        <div class="room-price">
+            <p>Selected Room</p>
+            <h2>{{ room.name }}</h2>
+            <br>
+            <strong>₦{{ room.price_per_night|floatformat:2 }}</strong>
+            <p>Per night</p>
+        </div>
+    </div>
+
+    <div class="form-section">
+
+        <h2>Booking Details</h2>
+
+        <p class="subtitle">
+            Please enter your details below.
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <div class="booking-summary"
+                 id="booking-summary"
+                 data-price="{{ room.price_per_night }}">
+
+                <h3>Booking Summary</h3>
+
+                <div class="summary-row">
+                    <span>Price per night</span>
+                    <strong id="price">₦{{ room.price_per_night|floatformat:2 }}</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Number of nights</span>
+                    <strong id="nights">0 nights</strong>
+                </div>
+
+                <div class="summary-row total">
+                    <span>Total Price</span>
+                    <strong id="total">₦0.00</strong>
+                </div>
+
+            </div>
+
+            <button type="submit">Submit Booking</button>
+
+        </form>
+
+        <a href="{% url 'home' %}" class="back-link">
+            ← Back to Rooms
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+    const summary = document.getElementById('booking-summary');
+    const pricePerNight = parseFloat(summary.dataset.price);
+
+    const checkIn = document.getElementById('id_check_in');
+    const checkOut = document.getElementById('id_check_out');
+
+    const nightsDisplay = document.getElementById('nights');
+    const totalDisplay = document.getElementById('total');
+
+    function calculatePrice() {
+
+        if (!checkIn.value || !checkOut.value) {
+            nightsDisplay.textContent = '0 nights';
+            totalDisplay.textContent = '₦0.00';
+            return;
+        }
+
+        const start = new Date(checkIn.value + 'T00:00:00');
+        const end = new Date(checkOut.value + 'T00:00:00');
+
+        const difference = end - start;
+        const nights = difference / (1000 * 60 * 60 * 24);
+
+        if (nights <= 0) {
+            nightsDisplay.textContent = 'Invalid dates';
+            totalDisplay.textContent = '₦0.00';
+            return;
+        }
+
+        const total = nights * pricePerNight;
+
+        nightsDisplay.textContent =
+            nights + (nights === 1 ? ' night' : ' nights');
+
+        totalDisplay.textContent =
+            '₦' + total.toLocaleString('en-NG', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+    }
+
+    checkIn.addEventListener('change', function () {
+        checkOut.min = this.value;
+
+        if (checkOut.value && checkOut.value <= this.value) {
+            checkOut.value = '';
+        }
+
+        calculatePrice();
+    });
+
+    checkOut.addEventListener('change', calculatePrice);
+</script>
+
+</body>
+</html>

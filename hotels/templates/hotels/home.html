@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ hotel_name }} | Luxury Hotel Experience</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'DM Sans', sans-serif; background: #faf9f6; color: #202b30; }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 23px 8%; background: #102a35;
+        }
+        .logo { color: #d7b77a; font-family: 'Playfair Display', serif; font-size: 30px; font-weight: bold; }
+        nav { display: flex; gap: 30px; }
+        nav a { color: white; text-decoration: none; font-size: 14px; transition: .3s; }
+        nav a:hover { color: #d7b77a; }
+
+        .hero {
+            min-height: 590px; padding: 110px 8%; display: flex;
+            flex-direction: column; justify-content: center; color: white;
+            background: linear-gradient(90deg, rgba(8,25,32,.85), rgba(8,25,32,.25)),
+            url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1800');
+            background-size: cover; background-position: center;
+        }
+        .hero-content { max-width: 700px; }
+        .hero-label { color: #e2c58d; letter-spacing: 4px; font-size: 12px; font-weight: bold; margin-bottom: 22px; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 62px; line-height: 1.2; margin-bottom: 22px; }
+        .hero p { font-size: 16px; line-height: 1.8; color: #eee; max-width: 500px; margin-bottom: 35px; }
+        .hero-btn { display: inline-block; padding: 15px 30px; background: #d7b77a; color: #102a35; text-decoration: none; font-weight: bold; border-radius: 4px; transition: .3s; }
+        .hero-btn:hover { background: white; }
+
+        .search-section { padding: 0 8%; margin-top: -45px; position: relative; }
+        .search-box {
+            background: white; padding: 25px; display: flex; gap: 15px;
+            flex-wrap: wrap; align-items: center;
+            box-shadow: 0 10px 35px rgba(0,0,0,.10); border-radius: 6px;
+        }
+        .search-box input, .search-box select {
+            flex: 1; min-width: 150px; padding: 15px; border: 1px solid #e5e5e5;
+            border-radius: 4px; background: white; color: #102a35; font-family: inherit;
+        }
+        .search-box button { padding: 15px 25px; background: #102a35; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .search-box button:hover { background: #d7b77a; color: #102a35; }
+
+        .section { padding: 90px 8%; }
+        .section-heading { text-align: center; margin-bottom: 45px; }
+        .section-heading span { color: #b28d50; letter-spacing: 3px; font-size: 12px; font-weight: bold; }
+        .section-heading h2 { font-family: 'Playfair Display', serif; font-size: 38px; margin: 12px 0; color: #102a35; }
+        .section-heading p { color: #777; font-size: 14px; }
+
+        .rooms { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; align-items: stretch; }
+        .room { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 25px rgba(0,0,0,.06); transition: .3s; }
+        .room:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,.10); }
+        .room img { width: 100%; height: 220px; object-fit: cover; display: block; }
+        .room-info { padding: 22px; }
+        .room-info h3 { font-family: 'Playfair Display', serif; font-size: 21px; color: #102a35; margin-bottom: 10px; }
+        .room-info p { line-height: 1.6; font-size: 13px; color: #777; min-height: 42px; max-height: 63px; overflow: hidden; }
+        .price { color: #a47c3d; font-weight: bold; margin-top: 15px; font-size: 16px; }
+        .book-btn { display: inline-block; background: #102a35; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; margin-top: 15px; font-size: 13px; transition: .3s; }
+        .book-btn:hover { background: #d7b77a; color: #102a35; }
+        .empty-message { text-align: center; color: #777; grid-column: 1 / -1; padding: 30px; }
+
+        .why-section { background: #102a35; color: white; text-align: center; padding: 80px 8%; }
+        .why-section h2 { font-family: 'Playfair Display', serif; font-size: 35px; margin-bottom: 18px; }
+        .why-section p { color: #d4dce0; line-height: 1.8; max-width: 650px; margin: auto; }
+
+        footer { background: #091e27; color: white; padding: 50px 8% 20px; font-size: 14px; }
+        .footer-content { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; padding-bottom: 35px; }
+        .footer-content h2 { color: #d7b77a; font-family: 'Playfair Display', serif; font-size: 30px; margin-bottom: 15px; }
+        .footer-content h3 { color: #d7b77a; margin-bottom: 15px; }
+        .footer-content p { color: #c5ced1; line-height: 2; }
+        .footer-content a { color: #c5ced1; text-decoration: none; }
+        .footer-content a:hover { color: #d7b77a; }
+        .footer-bottom { border-top: 1px solid #34454c; padding-top: 20px; text-align: center; color: #aab5b9; }
+
+        .whatsapp-float {
+            position: fixed; width: 58px; height: 58px; bottom: 25px; right: 25px;
+            background: #25D366; color: white; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-size: 27px;
+            text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,.2); z-index: 1000;
+        }
+
+        @media (max-width: 700px) {
+            header { padding: 20px 5%; flex-wrap: wrap; gap: 15px; }
+            .logo { font-size: 25px; }
+            nav { gap: 15px; }
+            nav a { font-size: 12px; }
+            .hero { min-height: 480px; padding: 80px 5%; }
+            .hero h1 { font-size: 42px; }
+            .search-section { padding: 0 5%; }
+            .search-box { padding: 18px; }
+            .section { padding: 65px 5%; }
+            .section-heading h2 { font-size: 30px; }
+            .rooms { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 380px) {
+            nav { gap: 10px; }
+            nav a { font-size: 11px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">{{ hotel_name }}.</div>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#rooms">Rooms</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-label">EXPERIENCE LUXURY</div>
+        <h1>Discover a New Level of Luxury & Comfort</h1>
+        <p>Experience exceptional hospitality, beautiful spaces and unforgettable moments. Your perfect stay begins here.</p>
+        <a href="#rooms" class="hero-btn">Explore Our Rooms</a>
+    </div>
+</section>
+
+<section class="search-section">
+    <form class="search-box" method="GET" action="{% url 'home' %}">
+        <select name="guests">
+            <option value="">Guests</option>
+            {% for number in "123456" %}
+                <option value="{{ number }}" {% if guests|stringformat:"s" == number %}selected{% endif %}>
+                    {{ number }} Guest{{ number|pluralize }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <input type="date" name="check_in" value="{{ check_in|default:'' }}" aria-label="Check-in date">
+        <input type="date" name="check_out" value="{{ check_out|default:'' }}" aria-label="Check-out date">
+        <button type="submit">Search Rooms</button>
+    </form>
+</section>
+
+<section class="section" id="rooms">
+    <div class="section-heading">
+        <span>OUR ACCOMMODATION</span>
+        <h2>Explore Our Luxury Rooms</h2>
+        <p>Carefully designed spaces for relaxation, comfort and memorable experiences.</p>
+    </div>
+
+    <div class="rooms">
+        {% for room in rooms %}
+            <div class="room">
+                {% if room.image %}
+                    <img src="{{ room.image.url }}" alt="{{ room.name }}">
+                {% else %}
+                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800" alt="Hotel room">
+                {% endif %}
+
+                <div class="room-info">
+                    <h3>{{ room.name }}</h3>
+                    <p>{{ room.description }}</p>
+                    <div class="price">₦{{ room.price_per_night|floatformat:2 }} / night</div>
+                    <a href="{% url 'book_room' room.id %}" class="book-btn">Book Now</a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="empty-message">No rooms are currently available.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="why-section" id="about">
+    <h2>Comfort Beyond Expectations</h2>
+    <p>At {{ hotel_name }}, every detail is designed to make your stay comfortable and memorable. Discover welcoming spaces, quality accommodation and hospitality that makes you feel at home.</p>
+</section>
+
+<footer id="contact">
+    <div class="footer-content">
+        <div>
+            <h2>{{ hotel_name }}.</h2>
+            <p>Experience luxury, comfort and exceptional hospitality.</p>
+        </div>
+
+        <div>
+            <h3>Contact Us</h3>
+            <p>Phone: <a href="tel:{{ hotel_phone }}">{{ hotel_phone }}</a></p>
+            <p>Email: <a href="mailto:{{ hotel_email }}">{{ hotel_email }}</a></p>
+            <p>Location: {{ hotel_address }}</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 {{ hotel_name }}. All Rights Reserved.
+    </div>
+</footer>
+
+<script>
+    const searchParams = new URLSearchParams(window.location.search);
+
+    if (searchParams.has('guests') || searchParams.has('check_in') || searchParams.has('check_out')) {
+        document.getElementById('rooms').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    const checkIn = document.querySelector('[name="check_in"]');
+    const checkOut = document.querySelector('[name="check_out"]');
+
+    checkIn.addEventListener('change', function () {
+        checkOut.min = this.value;
+        if (checkOut.value && checkOut.value <= this.value) {
+            checkOut.value = '';
+        }
+    });
+</script>
+
+<a href="https://wa.me/{{ hotel_whatsapp }}?text=Hello%20{{ hotel_name }},%20I%20want%20to%20make%20an%20enquiry."
+   class="whatsapp-float" target="_blank" rel="noopener noreferrer"
+   aria-label="Contact {{ hotel_name }} on WhatsApp">☎</a>
+
+</body>
+</html>

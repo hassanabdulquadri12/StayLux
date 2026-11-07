@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Received | StayLux</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f5f3ed;
+            color: #102a35;
+            padding: 35px 15px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 30px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 35px rgba(0,0,0,.07);
+        }
+
+        .logo {
+            text-align: center;
+            color: #b28d50;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 35px;
+        }
+
+        .success-icon {
+            width: 70px;
+            height: 70px;
+            margin: auto auto 20px;
+            background: #e5f5eb;
+            color: #23834b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .message {
+            text-align: center;
+            color: #777;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .status {
+            margin: 25px auto;
+            background: #fff7e6;
+            color: #91651f;
+            padding: 13px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .booking-details {
+            background: #f8f8f6;
+            padding: 25px;
+            border-radius: 9px;
+            margin-top: 25px;
+        }
+
+        .booking-details h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 21px;
+            margin-bottom: 15px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 13px 0;
+            border-bottom: 1px solid #e5e5e5;
+            font-size: 14px;
+        }
+
+        .detail-row span {
+            color: #777;
+        }
+
+        .detail-row strong {
+            text-align: right;
+        }
+
+        .total {
+            border: none;
+            padding-top: 20px;
+            font-size: 19px;
+            color: #a78343;
+        }
+
+        .notice {
+            color: #777;
+            font-size: 12px;
+            line-height: 1.7;
+            margin-top: 20px;
+        }
+
+        .home-btn {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background: #102a35;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 25px;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        .home-btn:hover {
+            background: #c5a46d;
+            color: #102a35;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 18px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .detail-row {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">StayLux.</div>
+
+    <div class="success-icon">✓</div>
+
+    <h1>Booking Received!</h1>
+
+    <p class="message">
+        Thank you for choosing StayLux.
+        Your booking request has been submitted successfully.
+    </p>
+
+    <div class="status">
+        Booking Status: {{ booking.status }}
+    </div>
+
+    <div class="booking-details">
+
+        <h2>Your Booking Details</h2>
+
+        <div class="detail-row">
+            <span>Guest Name</span>
+            <strong>{{ booking.guest_name }}</strong>
+        </div>
+
+        <div class="detail-row">
+            <span>Room</span>
+            <strong>{{ booking.room.name }}</strong>
+        </div>
+
+        <div class="detail-row">
+            <span>Check-in</span>
+            <strong>{{ booking.check_in|date:"d M Y" }}</strong>
+        </div>
+
+        <div class="detail-row">
+            <span>Check-out</span>
+            <strong>{{ booking.check_out|date:"d M Y" }}</strong>
+        </div>
+
+        <div class="detail-row">
+            <span>Number of nights</span>
+            <strong>{{ booking.number_of_nights }}</strong>
+        </div>
+
+        <div class="detail-row">
+            <span>Guests</span>
+            <strong>{{ booking.number_of_guests }}</strong>
+        </div>
+
+        <div class="detail-row total">
+            <span>Total Price</span>
+            <strong>₦{{ booking.total_price|floatformat:2 }}</strong>
+        </div>
+
+    </div>
+
+    <p class="notice">
+        Please wait for the hotel to review your booking request.
+        Your reservation is not fully confirmed until the hotel approves it.
+        No payment has been collected through this website.
+    </p>
+
+    <a href="{% url 'home' %}" class="home-btn">
+        Return to Homepage
+    </a>
+
+</div>
+
+</body>
+</html>
