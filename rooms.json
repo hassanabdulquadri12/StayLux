@@ -1,0 +1,47 @@
+[
+{
+  "model": "hotels.room",
+  "pk": 1,
+  "fields": {
+    "name": "Executive Comfort Room",
+    "room_type": "deluxe",
+    "description": "Enjoy a comfortable stay in a spacious room with beautiful interiors and modern facilities.",
+    "price_per_night": "55000.00",
+    "available_rooms": 3,
+    "max_guests": 2,
+    "image": "rooms/Hotel_image.jpeg",
+    "is_available": true,
+    "created_at": "2026-11-05T12:33:07.272Z"
+  }
+},
+{
+  "model": "hotels.room",
+  "pk": 2,
+  "fields": {
+    "name": "Deluxe Room",
+    "room_type": "Deluxe",
+    "description": "A stylish room with elegant interiors modern facilities and relaxing atmosphere.",
+    "price_per_night": "30000.00",
+    "available_rooms": 1,
+    "max_guests": 4,
+    "image": "rooms/hotel_3_y5cYPpp.jpeg",
+    "is_available": true,
+    "created_at": "2026-11-05T14:03:46.461Z"
+  }
+},
+{
+  "model": "hotels.room",
+  "pk": 3,
+  "fields": {
+    "name": "Deluxe Room",
+    "room_type": "single",
+    "description": "very neat",
+    "price_per_night": "20000.00",
+    "available_rooms": 5,
+    "max_guests": 2,
+    "image": "rooms/heloo_-_Copy_2.jpg",
+    "is_available": true,
+    "created_at": "2026-11-07T09:32:27.849Z"
+  }
+}
+]
